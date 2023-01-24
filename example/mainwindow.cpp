@@ -1,6 +1,7 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 #include <QDebug>
+#include <QFile>
 
 QSqlDatabase MainWindow::db;
 
@@ -42,7 +43,7 @@ bool MainWindow::insertAccount(QString login, QString password, QString textFile
     QString sql = "INSERT INTO accounts (login,password,textFile) VALUES ('"+login+"','"+password+"','"+textFile+"')";
     if(qry.exec(sql)) {
         qDebug() <<"Insertion OK";
-        MainWindow::createTextFile(login, password);
+        MainWindow::createTextFile(login);
         qDebug() << MainWindow::getFileName(login);
         return true;
     } else {
@@ -54,27 +55,23 @@ bool MainWindow::insertAccount(QString login, QString password, QString textFile
 QString MainWindow::getFileName(QString login)
 {
     QSqlQuery qry;
-    QString sql = "SELECT textFile FROM accounts WHERE login = '"+login+"'";
+    QString sql = "SELECT textFile FROM accounts WHERE login='"+login+"'";
     if(qry.exec(sql)) {
-        qDebug() <<"Recherche OK";
         while(qry.next()) {
             fileName = qry.value(0).toString();
         }
-        return fileName;
-    } else {
-        qDebug() <<"Recherche KO";
-        return "KO";
     }
+    return fileName;
 }
 
-QString MainWindow::createTextFile(QString login, QString password)
+QString MainWindow::createTextFile(QString login)
 {
+    // create a text file empty and return the name of the file
     fileName = login + ".txt";
     QFile file(fileName);
     if (file.open(QIODevice::WriteOnly | QIODevice::Text)) {
         QTextStream out(&file);
-        out << "Login: " << login << endl;
-        out << "Password: " << password << endl;
+        out << "";
         file.close();
     }
     return fileName;
@@ -101,9 +98,7 @@ QString MainWindow::modifyTextFile(QString login, QString password, QString text
     QFile file(fileName);
     if (file.open(QIODevice::WriteOnly | QIODevice::Text)) {
         QTextStream out(&file);
-        out << "Login: " << login << endl;
-        out << "Password: " << password << endl;
-        out << "Text: " << text << endl;
+        out << text;
         file.close();
     }
     return fileName;
@@ -115,7 +110,7 @@ MainWindow::MainWindow(QWidget *parent)
 {
     ui->setupUi(this);
     if(MainWindow::ouvreDb()) {
-        ui->status->setText( "DB OK");
+        ui->status->setText("DB OK");
     } else {
         ui->status->setText("DB KO");
     }

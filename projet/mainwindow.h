@@ -17,13 +17,6 @@ public:
     static QSqlDatabase db;
     static bool ouvreDb();
     static void fermeDb();
-    static bool creerTable();
-    static bool insertAccount(QString login, QString password, QString textFile);
-    static bool updateAccount(QString login, QString password, QString textFile);
-    static QString getFileName(QString login);
-    static QString createTextFile(QString login);
-    static QString readTextFile(QString login);
-    static QString modifyTextFile(QString login, QString text);
 public:
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
