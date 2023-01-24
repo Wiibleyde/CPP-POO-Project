@@ -71,7 +71,7 @@ public:
         MainWindow->setCentralWidget(centralwidget);
         menubar = new QMenuBar(MainWindow);
         menubar->setObjectName("menubar");
-        menubar->setGeometry(QRect(0, 0, 800, 23));
+        menubar->setGeometry(QRect(0, 0, 800, 21));
         MainWindow->setMenuBar(menubar);
         statusbar = new QStatusBar(MainWindow);
         statusbar->setObjectName("statusbar");
@@ -87,8 +87,8 @@ public:
         MainWindow->setWindowTitle(QCoreApplication::translate("MainWindow", "MainWindow", nullptr));
         status->setText(QString());
         groupBox->setTitle(QCoreApplication::translate("MainWindow", "Connexion", nullptr));
-        label->setText(QCoreApplication::translate("MainWindow", "Loguine :", nullptr));
-        label_2->setText(QCoreApplication::translate("MainWindow", "Passwaurde :", nullptr));
+        label->setText(QCoreApplication::translate("MainWindow", "Login :", nullptr));
+        label_2->setText(QCoreApplication::translate("MainWindow", "Password :", nullptr));
         pb_connect->setText(QCoreApplication::translate("MainWindow", "Connecter", nullptr));
     } // retranslateUi
 
