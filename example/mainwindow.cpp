@@ -7,7 +7,7 @@ QSqlDatabase MainWindow::db;
 bool MainWindow::ouvreDb()
 {
     MainWindow::db = QSqlDatabase::addDatabase("QSQLITE");
-    MainWindow::db.setDatabaseName("/home/arno/boulot/Qt projets/TP/accounts.sq3");
+    MainWindow::db.setDatabaseName("../accounts.sq3");
     if(MainWindow::db.open()) {
         //qDebug() <<"OuvreDb : connexion OK";
         return true;
@@ -29,7 +29,6 @@ MainWindow::MainWindow(QWidget *parent)
 {
     ui->setupUi(this);
     if(MainWindow::ouvreDb()) {
-
         ui->status->setText( "Connexion à la Base de Données OK.");
     } else {
         ui->status->setText("Problème de connexion à la Base de Données");
@@ -56,7 +55,6 @@ void MainWindow::on_pb_connect_clicked()
     //qDebug()<<sql;
     if(qry.exec(sql)) {
         qry.next();
-
         int nb=qry.value(0).toInt();
         switch(nb) {
         case 0:
@@ -70,7 +68,6 @@ void MainWindow::on_pb_connect_clicked()
         default:
             ui->status->setText("Duplication de compte !");
             break;
-
         }
     } else {
         qDebug() <<"Erreur sql ??";

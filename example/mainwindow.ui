@@ -55,7 +55,7 @@
       </rect>
      </property>
      <property name="text">
-      <string>Loguine :</string>
+      <string>Login :</string>
      </property>
     </widget>
     <widget class="QLabel" name="label_2">
@@ -68,7 +68,7 @@
       </rect>
      </property>
      <property name="text">
-      <string>Passwaurde :</string>
+      <string>Password :</string>
      </property>
     </widget>
     <widget class="QLineEdit" name="le_login">
@@ -112,7 +112,7 @@
      <x>0</x>
      <y>0</y>
      <width>800</width>
-     <height>23</height>
+     <height>21</height>
     </rect>
    </property>
   </widget>
