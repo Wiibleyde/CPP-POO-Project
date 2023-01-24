@@ -42,11 +42,71 @@ bool MainWindow::insertAccount(QString login, QString password, QString textFile
     QString sql = "INSERT INTO accounts (login,password,textFile) VALUES ('"+login+"','"+password+"','"+textFile+"')";
     if(qry.exec(sql)) {
         qDebug() <<"Insertion OK";
+        MainWindow::createTextFile(login, password);
+        qDebug() << MainWindow::getFileName(login);
         return true;
     } else {
         qDebug() <<"Insertion KO";
         return false;
     }
+}
+
+QString MainWindow::getFileName(QString login)
+{
+    QSqlQuery qry;
+    QString sql = "SELECT textFile FROM accounts WHERE login = '"+login+"'";
+    if(qry.exec(sql)) {
+        qDebug() <<"Recherche OK";
+        while(qry.next()) {
+            fileName = qry.value(0).toString();
+        }
+        return fileName;
+    } else {
+        qDebug() <<"Recherche KO";
+        return "KO";
+    }
+}
+
+QString MainWindow::createTextFile(QString login, QString password)
+{
+    fileName = login + ".txt";
+    QFile file(fileName);
+    if (file.open(QIODevice::WriteOnly | QIODevice::Text)) {
+        QTextStream out(&file);
+        out << "Login: " << login << endl;
+        out << "Password: " << password << endl;
+        file.close();
+    }
+    return fileName;
+}
+
+QString MainWindow::readTextFile(QString login, QString password)
+{
+    fileName = login + ".txt";
+    QFile file(fileName);
+    if (file.open(QIODevice::ReadOnly | QIODevice::Text)) {
+        QTextStream in(&file);
+        while (!in.atEnd()) {
+            QString line = in.readLine();
+            qDebug() << line;
+        }
+        file.close();
+    }
+    return fileName;
+}
+
+QString MainWindow::modifyTextFile(QString login, QString password, QString text)
+{
+    fileName = login + ".txt";
+    QFile file(fileName);
+    if (file.open(QIODevice::WriteOnly | QIODevice::Text)) {
+        QTextStream out(&file);
+        out << "Login: " << login << endl;
+        out << "Password: " << password << endl;
+        out << "Text: " << text << endl;
+        file.close();
+    }
+    return fileName;
 }
 
 MainWindow::MainWindow(QWidget *parent)
@@ -55,9 +115,9 @@ MainWindow::MainWindow(QWidget *parent)
 {
     ui->setupUi(this);
     if(MainWindow::ouvreDb()) {
-        ui->status->setText( "Connexion à la Base de Données OK.");
+        ui->status->setText( "DB OK");
     } else {
-        ui->status->setText("Problème de connexion à la Base de Données");
+        ui->status->setText("DB KO");
     }
 }
 
@@ -76,9 +136,9 @@ void MainWindow::on_pb_connect_clicked()
     QString pass = ui->le_password->text();
     QString accord;
     QSqlQuery qry;
-    //qDebug() <<"Traitement connexion";
+    qDebug() <<"Traitement connexion";
     QString sql = "SELECT COUNT(*) as nb, idAccount, sex FROM accounts WHERE login='"+login+"' AND password='"+pass+"'";
-    //qDebug()<<sql;
+    qDebug()<<sql;
     if(qry.exec(sql)) {
         qry.next();
         int nb=qry.value(0).toInt();
