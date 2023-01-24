@@ -7,7 +7,7 @@ QSqlDatabase MainWindow::db;
 bool MainWindow::ouvreDb()
 {
     MainWindow::db = QSqlDatabase::addDatabase("QSQLITE");
-    MainWindow::db.setDatabaseName("../accounts.sq3");
+    MainWindow::db.setDatabaseName("accounts.sq3");
     if(MainWindow::db.open()) {
         //qDebug() <<"OuvreDb : connexion OK";
         return true;
