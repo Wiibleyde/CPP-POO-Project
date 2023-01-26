@@ -1,0 +1,17 @@
+{
+    "configurations": [
+        {
+            "name": "Linux",
+            "includePath": [
+                "${workspaceFolder}/**"
+            ],
+            "defines": [],
+            "compilerPath": "/usr/bin/gcc",
+            "cStandard": "gnu17",
+            "cppStandard": "gnu++17",
+            "intelliSenseMode": "linux-gcc-x64",
+            "compileCommands": "${workspaceFolder}/build-04_Sqlite3LoginFormEtudiant-Desktop_Qt_6_4_2_GCC_64bit-Debug/.qtc_clangd/compile_commands.json"
+        }
+    ],
+    "version": 4
+}
