@@ -38,6 +38,20 @@ bool MainWindow::addUser(QString username, QString password)
     }
 }
 
+bool MainWindow::addAime(int idAccount, QString passion)
+{
+    QSqlQuery qry;
+    QString sql = "INSERT INTO aime (idAccount, libelle) VALUES ("+QString::number(idAccount)+", '"+passion+"')";
+    qDebug() <<sql;
+    if(qry.exec(sql)) {
+        qDebug() <<"Ajout aime OK";
+        return true;
+    } else {
+        qDebug() <<"Ajout aime KO";
+        return false;
+    }
+}
+
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::MainWindow)

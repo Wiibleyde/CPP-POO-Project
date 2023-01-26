@@ -12,29 +12,27 @@
 #include <QtCore/QVariant>
 #include <QtWidgets/QApplication>
 #include <QtWidgets/QDialog>
+#include <QtWidgets/QHeaderView>
 #include <QtWidgets/QLabel>
 #include <QtWidgets/QLineEdit>
-#include <QtWidgets/QListView>
 #include <QtWidgets/QPushButton>
+#include <QtWidgets/QTableView>
 
 QT_BEGIN_NAMESPACE
 
 class Ui_UserDialog
 {
 public:
-    QListView *lv_passions;
     QLabel *status;
     QLineEdit *le_passion;
     QPushButton *pb_passion;
+    QTableView *tv_passion;
 
     void setupUi(QDialog *UserDialog)
     {
         if (UserDialog->objectName().isEmpty())
             UserDialog->setObjectName("UserDialog");
-        UserDialog->resize(631, 311);
-        lv_passions = new QListView(UserDialog);
-        lv_passions->setObjectName("lv_passions");
-        lv_passions->setGeometry(QRect(10, 110, 611, 192));
+        UserDialog->resize(631, 312);
         status = new QLabel(UserDialog);
         status->setObjectName("status");
         status->setEnabled(true);
@@ -45,6 +43,10 @@ public:
         pb_passion = new QPushButton(UserDialog);
         pb_passion->setObjectName("pb_passion");
         pb_passion->setGeometry(QRect(120, 70, 131, 25));
+        pb_passion->setFlat(false);
+        tv_passion = new QTableView(UserDialog);
+        tv_passion->setObjectName("tv_passion");
+        tv_passion->setGeometry(QRect(10, 100, 611, 201));
 
         retranslateUi(UserDialog);
 

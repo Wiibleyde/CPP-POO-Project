@@ -5,6 +5,8 @@
 #include <QtSql>
 #include <QSqlDatabase>
 #include <QMessageBox>
+#include <QList>
+#include <QString>
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -18,6 +20,7 @@ public:
     static bool ouvreDb();
     static void fermeDb();
     static bool addUser(QString username, QString password);
+    static bool addAime(int idAccount, QString passion);
 public:
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
