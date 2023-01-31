@@ -20,10 +20,13 @@ public:
 public:
     explicit UserDialog(int id, QWidget *parent = nullptr);
     ~UserDialog();
+    void ReloadTable();
 private:
     Ui::UserDialog *ui;
 private slots:
     void on_pb_passion_clicked();
+    void on_pb_rm_passion_clicked();
+    void on_pb_refresh_clicked();
     // void on_pb_logout_clicked();
 };
 

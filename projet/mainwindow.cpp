@@ -52,6 +52,20 @@ bool MainWindow::addAime(int idAccount, QString passion)
     }
 }
 
+bool MainWindow::rmAime(int idAccount, QString passion)
+{
+    QSqlQuery qry;
+    QString sql = "DELETE FROM aime WHERE idAccount="+QString::number(idAccount)+" AND libelle='"+passion+"'";
+    qDebug() <<sql;
+    if(qry.exec(sql)) {
+        qDebug() <<"Suppression aime OK";
+        return true;
+    } else {
+        qDebug() <<"Suppression aime KO";
+        return false;
+    }
+}
+
 QList<QString> MainWindow::getAime(int idAccount)
 {
     QList<QString> list;
