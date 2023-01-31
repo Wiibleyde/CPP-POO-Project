@@ -21,6 +21,7 @@ public:
     static void fermeDb();
     static bool addUser(QString username, QString password);
     static bool addAime(int idAccount, QString passion);
+    static QList<QString> getAime(int idAccount);
 public:
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();

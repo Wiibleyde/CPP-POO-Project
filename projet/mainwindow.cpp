@@ -52,6 +52,24 @@ bool MainWindow::addAime(int idAccount, QString passion)
     }
 }
 
+QList<QString> MainWindow::getAime(int idAccount)
+{
+    QList<QString> list;
+    QSqlQuery qry;
+    QString sql = "SELECT libelle from aime where idAccount="+QString::number(idAccount);
+    qDebug() <<sql;
+    if(qry.exec(sql)) {
+        qDebug() <<"getAime OK";
+        while(qry.next()) {
+            list.append(qry.value(0).toString());
+        }
+        return list;
+    } else {
+        qDebug() <<"getAime KO";
+        return list;
+    }
+}
+
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::MainWindow)
