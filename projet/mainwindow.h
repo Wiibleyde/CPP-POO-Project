@@ -22,6 +22,7 @@ public:
     static bool addUser(QString username, QString password);
     static bool addAime(int idAccount, QString passion);
     static bool rmAime(int idAccount, QString passion);
+    static QString getUserById(int id);
     static QList<QString> getAime(int idAccount);
 public:
     MainWindow(QWidget *parent = nullptr);
