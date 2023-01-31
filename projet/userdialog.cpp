@@ -3,10 +3,11 @@
 #include "mainwindow.h"
 // #include <QSqlRelationalTableModel>
 #include <QStandardItemModel>
+#include <QVBoxLayout>
 
 UserDialog::UserDialog(int id, QWidget *parent) : QDialog(parent), currentId(id), ui(new Ui::UserDialog)
 {
-    ui -> setupUi(this);
+    ui->setupUi(this);
     QList<QString> passions = MainWindow::getAime(id);
     if (!passions.empty()) {
         QStandardItemModel *model = new QStandardItemModel(passions.size(), 1, this);
@@ -15,9 +16,15 @@ UserDialog::UserDialog(int id, QWidget *parent) : QDialog(parent), currentId(id)
             model->setItem(i, 0, new QStandardItem(passions[i]));
         }
         ui->tv_passion->setModel(model);
+        ui->tv_passion->verticalHeader()->setVisible(false);
+        ui->tv_passion->horizontalHeader()->setStretchLastSection(true);
+        ui->tv_passion->setEditTriggers(QAbstractItemView::NoEditTriggers);
+
+        QVBoxLayout *layout = new QVBoxLayout;
+        layout->addWidget(ui->tv_passion);
+        setLayout(layout);
     }
 }
-
 
 UserDialog::~UserDialog()
 {
